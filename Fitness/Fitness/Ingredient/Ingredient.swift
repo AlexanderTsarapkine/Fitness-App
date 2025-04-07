@@ -18,16 +18,29 @@ enum Units: String, Codable, CaseIterable {
 final class Ingredient {
     var name: String
     
-    var calories: Int32 = 0
+    var calories: Int32 = 0 // convert to object / extend object
     var totalCarbohydrates: Int32 = 0
     var protein: Int32 = 0
     var totalFats: Int32 = 0
     var serving: Int32 = 1
     var unit: Units = Units.g
+//    var copy: Bool = false
     
     init(name: String) {
         self.name = name
     }
+    
+//    func clone() -> Ingredient {
+//        let copyIngredient = Ingredient(name: self.name)
+//        copyIngredient.protein = self.protein
+//        copyIngredient.totalCarbohydrates = self.totalCarbohydrates
+//        copyIngredient.totalFats = self.totalFats
+//        copyIngredient.serving = self.serving
+//        copyIngredient.unit = self.unit
+//        copyIngredient.copy = true
+//        copyIngredient.updateCalories()
+//        return copyIngredient
+//    }
     
     func updateCalories() {
         self.calories = calcCalories()

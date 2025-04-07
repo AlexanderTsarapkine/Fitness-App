@@ -75,8 +75,8 @@ struct IngredientDetailedView: View {
             .onChange(of: localIngredient.totalFats) {localIngredient.updateCalories() }
             .onChange(of: localIngredient.serving) {localIngredient.updateCalories() }
             
-            .navigationBarTitle("\(new ? "Add" : "Edit") Ingredient", displayMode: .inline)
-            .navigationBarItems(trailing: Button("Done") {
+            .navigationBarTitle("\(new == true ? "Add" : "Edit") Ingredient", displayMode: .inline)
+            .navigationBarItems(trailing: Button("Save") {
                 if !localIngredient.name.isEmpty {
                     ingredient.name = localIngredient.name
                 }
@@ -93,15 +93,18 @@ struct IngredientDetailedView: View {
                     ingredient.totalFats = localIngredient.totalFats
                 }
                 ingredient.unit = localIngredient.unit
-                ingredient.updateCalories() // TODO: update these as values are entered
+                ingredient.updateCalories()
                 
                 if new {
                     modelContext.insert(ingredient)
+                } else {
+                    // TODO: update all recipes that contain ingredient? <-- eek
                 }
-
-                // Dismiss the sheet
                 isSheetPresented = false
-            })
+            }
+            .disabled(localIngredient.name.trimmingCharacters(in: .whitespaces).isEmpty)
+            .foregroundColor(localIngredient.name.trimmingCharacters(in: .whitespaces).isEmpty ? .gray : .blue)
+            )
         }
     }
 
@@ -114,7 +117,6 @@ struct IngredientDetailedView: View {
                 .keyboardType(.numberPad)
                 .frame(width: 80)
         }
-        .padding(.vertical, 8)
     }
     
 }

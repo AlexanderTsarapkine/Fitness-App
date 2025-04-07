@@ -10,7 +10,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Recipe {
+final class Dish {
     var name: String
     var calories: Int32 = 0
     var totalCarbohydrates: Int32 = 0
@@ -34,19 +34,8 @@ final class Recipe {
         }
         
         self.calories = self.totalCarbohydrates * 4 + self.protein * 4 + self.totalFats * 9
-    }
-    
-    func addIngredient(_ ingredient: Ingredient, amount: Double) {
-        let entry = IngredientEntry(ingredient: ingredient, multiplier: amount)
-        ingredients.append(entry)
-        updateNutrition()
-    }
-    
-    func removeIngredient(at index: Int) {
-        if ingredients.indices.contains(index) {
-            ingredients.remove(at: index)
-            updateNutrition()
-        }
+        print("calories ", self.calories)
+        print("ingredientEntries", self.ingredients.count)
     }
 }
 

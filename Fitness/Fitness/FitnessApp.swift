@@ -13,6 +13,7 @@ struct FitnessApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Ingredient.self,
+            Dish.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
